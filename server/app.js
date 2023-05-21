@@ -2,7 +2,12 @@ const express = require('express')
 const connectDB = require('./config/db')
 const app = express()
 
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
 connectDB()
+const userRoutes = require('./routes/userRoutes')
+app.use('/', userRoutes)
 
 app.get('/', (req, res) => {
   res.json({
